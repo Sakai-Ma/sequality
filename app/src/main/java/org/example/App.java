@@ -4,11 +4,37 @@
 package org.example;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+  /**
+   * Returns the greeting message.
+   */
+  public String getGreeting() {
+    return "Hello World!";
+  }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-    }
+  public static void main(String[] args) {
+    App app = new App();
+    // 挨拶を表示
+    System.out.println(app.getGreeting());
+
+    // Calculate クラスの各メソッドを呼び出して結果を表示
+    Calculate calc = new Calculate();
+
+    // 2 と 3 の合計・平均
+    int a = 2, b = 3;
+    int sum23 = calc.sum(a, b);
+    double avg23 = calc.average(a, b);
+    System.out.printf("Sum of %d and %d is %d. Average is %.1f.%n", a, b, sum23, avg23);
+
+    // 1 から 10 の合計・平均
+    int from = 1, to = 10;
+    int sumRange = calc.sumRange(from, to);
+    double avgRange = calc.averageRange(from, to);
+    System.out.printf("Sum of %d to %d is %d. Average is %.1f.%n", from, to, sumRange, avgRange);
+
+    // 奇数と偶数の合計
+    int sumOdd = calc.sumOddRange(from, to);
+    int sumEven = calc.sumEvenRange(from, to);
+    System.out.printf("Sum of odd of %d to %d is %d.%n", from, to, sumOdd);
+    System.out.printf("Sum of even of %d to %d is %d.%n", from, to, sumEven);
+  }
 }

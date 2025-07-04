@@ -6,6 +6,9 @@ package org.example;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 public class AppTest {
   @Test
   public void appHasAGreeting() {
@@ -16,5 +19,26 @@ public class AppTest {
   public void testAppReternHelloWorld() {
     App classUnderTest = new App();
     assertEquals("Hello World!", classUnderTest.getGreeting());
+  }
+  @Test
+  public void testMainOutput() {
+    // 出力をキャプチャ
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(out));
+
+    // main を実行
+    App.main(new String[0]);
+
+    // 標準出力を戻す
+    System.setOut(originalOut);
+    String output = out.toString();
+
+    // 各行が含まれていることを確認
+    assertTrue(output.contains("Hello World!"));
+    assertTrue(output.contains("Sum of 2 and 3 is 5. Average is 2.5."));
+    assertTrue(output.contains("Sum of 1 to 10 is 55. Average is 5.5."));
+    assertTrue(output.contains("Sum of odd of 1 to 10 is 25."));
+    assertTrue(output.contains("Sum of even of 1 to 10 is 30."));
   }
 }
